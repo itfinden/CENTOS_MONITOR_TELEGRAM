@@ -276,18 +276,19 @@ if [ "$CRON_MODE" -eq 1 ] && [ "$CODE_MODE" -eq 1 ]; then
 	exit 1
 fi
 
-log "TOKEN is now $TOKEN"
-log "CHATS is now ${CHATS[*]}"
+log "TOKEN es ahora $TOKEN"
+log "CHATS es ahora ${CHATS[*]}"
 
 [ -z "$TOKEN" ] && TOKEN=$TELEGRAM_TOKEN
 [ ${#CHATS[@]} -eq 0 ] && CHATS=($TELEGRAM_CHAT)
 
-log "TOKEN is now $TOKEN"
-log "CHATS is now ${CHATS[*]}"
+log "TOKEN es ahora $TOKEN"
+log "CHATS es ahora ${CHATS[*]}"
 
-log "Importing config file(s)..."
+log "Importando archivo config ..."
 
 [ -r /etc/telegram.sh.conf ] && source /etc/telegram.sh.conf
+[ -r /root/CENTOS_MONITOR_TELEGRAM/itfinden.sh.conf ] && source /root/CENTOS_MONITOR_TELEGRAM/itfinden.sh.conf
 [ -r ~/.telegram.sh ] && source ~/.telegram.sh
 [ -r ~/.telegram.sh.conf ] && source ~/.telegram.sh.conf
 
@@ -296,10 +297,10 @@ log "Importing config file(s)..."
 [ -n "$TELEGRAM_DISABLE_WEB_PAGE_PREVIEW" ] && DISABLE_WEB_PAGE_PREVIEW="$TELEGRAM_DISABLE_WEB_PAGE_PREVIEW"
 [ -n "$TELEGRAM_DISABLE_NOTIFICATION" ] && DISABLE_NOTIFICATION="$TELEGRAM_DISABLE_NOTIFICATION"
 
-log "TOKEN is now $TOKEN"
-log "CHATS is now ${CHATS[*]}"
-log "DISABLE_WEB_PAGE_PREVIEW is now $DISABLE_WEB_PAGE_PREVIEW"
-log "DISABLE_NOTIFICATION is now $DISABLE_NOTIFICATION"
+log "TOKEN es ahora $TOKEN"
+log "CHATS es ahora ${CHATS[*]}"
+log "DISABLE_WEB_PAGE_PREVIEW es ahora $DISABLE_WEB_PAGE_PREVIEW"
+log "DISABLE_NOTIFICATION es ahora $DISABLE_NOTIFICATION"
 
 if [ -z "$TOKEN" ]; then
 	echo "No bot token was given."
@@ -438,14 +439,14 @@ for id in "${CHATS[@]}"; do
 
 	if [ "$HAS_JQ" = true ]; then
 		if [ "`jq -r '.ok' <<< "$response"`" != "true" ]; then
-			echo "Telegram reported following error:"
+			echo "Telegram reporto el siguiente error:"
 			jq -r '"\(.error_code): \(.description)"' <<< "$response"
 			echo "Quitting."
 			exit 1
 		fi
 	else
 		if [[ "$response" != '{"ok":true'* ]]; then
-			echo "Telegram reported an error:"
+			echo "Telegram reporto un error:"
 			echo $response
 			echo "Quitting."
 			exit 1
