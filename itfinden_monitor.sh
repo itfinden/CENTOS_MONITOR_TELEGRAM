@@ -33,6 +33,22 @@ fi
 # EXIM END
 
 
+#BLACKLIST
+
+#ipaddr=$(hostname -I)
+
+for ip in $(hostname -I)
+do
+
+ Salida_Rbl=$(perl rbl-check.pl -i 45.228.211.249)
+ echo $Salida_Rbl
+
+done
+
+
+#FIN BLACKLIST
+
+
 # USO DISCO 
 
 df -H | grep -vE '^Filesystem|tmpfs|cdrom' | awk '{ print $5 " " $1 }' | while read output;
